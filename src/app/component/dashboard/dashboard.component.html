@@ -1,18 +1,68 @@
-<div class="container-fluid">
-  <div class="row mt-5">
-    <div class="col"></div>
-    <div class="col-4">
+<div class="container-fluid header">
+  <div class="row">
+    <div class="col-12">
       <div class="card shadow">
         <div class="card-body">
-          <form>
-            <div class="mb-3">
-              <h4 class="text-danger text-muted">Welcome!</h4>
-            </div>
-            <button type="button" class="btn btn-warning text-center" (click)="logout()">Выйти</button>
-          </form>
+          <h4 class="text-danger text-muted">СИСТЕМА ДЛЯ УЧЁТА ОБОРУДОВАНИЯ ТУРИСТИЧЕСКОГО КЛУБА</h4>
+          <button type="button" class="btn btn-warning text-center" (click)="logout()">Выйти</button>
         </div>
       </div>
     </div>
-    <div class="col"></div>
   </div>
 </div>
+
+<!--<div class="container-fluid body">-->
+<!--  <div class="col-md-10 mt-2 table">-->
+<!--&lt;!&ndash;    <h5 class="text-danger">Список оборудования:</h5>&ndash;&gt;-->
+<!--    <div class="card p-3 shadow">-->
+<!--      <div class="card-body">-->
+<!--        <table class="table table-hover">-->
+<!--          <thead>-->
+<!--          <tr>-->
+<!--            <th scope="col">Название</th>-->
+<!--            <th scope="col">Инвентарный номер</th>-->
+<!--            <th scope="col">Арендатор</th>-->
+<!--            <th scope="col"></th>-->
+<!--            <th scope="col"><button class="btn btn-outline-success" (click)="openDialog()">Добавить</button></th>-->
+<!--          </tr>-->
+<!--          </thead>-->
+<!--          <tbody>-->
+<!--          <tr *ngFor="let equipment of equipmentsList">-->
+<!--            <td >{{equipment.name}}</td>-->
+<!--            <td>{{equipment.inv_number}}</td>-->
+<!--            <td>-->
+<!--              <button class="btn btn-outline-danger" (click)="deleteEquipment(equipment)">Удалить</button>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--          </tbody>-->
+<!--        </table>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Название</th>
+    <th scope="col">Инвентарный номер</th>
+    <th scope="col">Категория</th>
+    <th scope="col"></th>
+    <th scope="col"><button class="btn btn-outline-success" (click)="openDialog()">Добавить</button></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let equipment of equipmentsList; let i = index">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>{{equipment.name}}</td>
+    <td>{{equipment.inventory}}</td>
+    <td>{{equipment.category}}</td>
+    <td>
+      <button class="btn btn-outline-danger" (click)="deleteEquipment(equipment)">Удалить</button>
+      <button class="btn btn-outline-primary" (click)="openDialogEdit()">Редактировать</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

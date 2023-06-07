@@ -1,0 +1,58 @@
+<!--<div class="pop-up-add-comp">-->
+<!--  <mat-dialog-actions>-->
+<!--    <button mat-button mat-dialog-close>X</button>-->
+<!--  </mat-dialog-actions>-->
+<!--  <mat-dialog-content>-->
+<!--      <div class="card border-0 shadow p-3">-->
+<!--        <div class="form-floating mb-3 tetx-center">-->
+<!--          <h5 class="text-center text-warning">Добавление</h5>-->
+<!--        </div>-->
+<!--        <div class="form-floating mb-3">-->
+<!--          <input type="text" class="form-control" id="name" name="name" [(ngModel)]="name">-->
+<!--          <label for="name">Название</label>-->
+<!--        </div>-->
+<!--        <div class="form-floating mb-3">-->
+<!--          <input type="text" class="form-control" id="inventory" name="inventory" [(ngModel)]="inv_number">-->
+<!--          <label for="inventory">Инвентарный номер</label>-->
+<!--        </div>-->
+<!--        <div class="form-floating mb-3">-->
+<!--          <p for="category">Категория</p>-->
+<!--          <select id="category" name="category">-->
+<!--            <option value="outfit">Экипровка</option>-->
+<!--            <option value="transport">Средство передвижения</option>-->
+<!--            <option value="bivouac">Бивачное снаряжение</option>-->
+<!--            <option value="special">Бивачное снаряжение</option>-->
+<!--            <option value="other">Прочее</option>-->
+<!--          </select>-->
+<!--        </div>-->
+<!--        <button type="button" class="btn btn-outline-success" (click)="addEquipment()">Добавить</button>-->
+<!--      </div>-->
+<!--  </mat-dialog-content>-->
+<!--</div>-->
+
+
+<form [formGroup]="equipmentForm" (ngSubmit)="onSubmit()" novalidate>
+  <div>
+    <label for="name">Название</label>
+    <input type="text" class="form-control" id="name" formControlName="name" required>
+  </div>
+  <div>
+    <label for="inventory">Инвентарный номер</label>
+    <input type="text" class="form-control" id="inventory" formControlName="inventory" required>
+  </div>
+  <div>
+    <label for="category">Категория</label>
+    <select id="category" class="form-control" formControlName="category" required>
+      <option value="Экипровка">Экипровка</option>
+      <option value="Средство передвижения">Средство передвижения</option>
+      <option value="Бивачное снаряжение">Бивачное снаряжение</option>
+      <option value="Специальное снаряжение">Специальное снаряжение</option>
+      <option value="Прочее" selected="selected">Прочее</option>
+    </select>
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary" [disabled]="!equipmentForm.valid">Добавить</button>
+    <br>
+    <button type="reset" class="btn btn-danger">Сброс данных</button>
+  </div>
+</form>
