@@ -1,0 +1,14 @@
+.card {
+  width: 380px;
+  margin: 50px auto auto;
+}
+
+@media (max-width: 400px){
+  .card {
+    width: 90%;
+  }
+}
+
+.btn-info {
+  margin-top: 10px;
+}
