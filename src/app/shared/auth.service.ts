@@ -9,7 +9,6 @@ export class AuthService {
 
   constructor(private fireauth: AngularFireAuth, private router: Router) { }
 
-  // login method
   login(email: string, password: string) {
     this.fireauth.signInWithEmailAndPassword(email, password).then( () => {
       localStorage.setItem('token','true');
@@ -20,7 +19,6 @@ export class AuthService {
     })
   }
 
-  // register method
   register(email: string, password: string){
     this.fireauth.createUserWithEmailAndPassword(email, password).then(() => {
       alert('Вы успешно зарегестрировались!');
@@ -31,7 +29,6 @@ export class AuthService {
     })
   }
 
-  // sign out
   logout() {
     this.fireauth.signOut().then(() => {
       localStorage.removeItem('token');

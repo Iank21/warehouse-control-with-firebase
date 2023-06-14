@@ -1,5 +1,5 @@
-<div class="container-fluid header">
-  <div class="row">
+<div class="container-fluid">
+  <div class="row header">
     <div class="col-12">
       <div class="card shadow">
         <div class="card-body">
@@ -9,60 +9,139 @@
       </div>
     </div>
   </div>
+  <div class="mt-2 row body">
+    <div class="col-12">
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="table">
+            <div class="table-colgroup">
+              <div class="table-col" style="width: 5%"></div>
+              <div class="table-col" style="width: 22%"></div>
+              <div class="table-col" style="width: 12%"></div>
+              <div class="table-col" style="width: 12%"></div>
+              <div class="table-col" style="width: 8%"></div>
+              <div class="table-col" style="width: 20%"></div>
+              <div class="table-col" style="width: 8%"></div>
+              <div class="table-col" style="width: 14%"></div>
+            </div>
+            <div class="table-thead">
+              <div class="table-tr">
+                <div class="table-th">#</div>
+                <div class="table-th">Название</div>
+                <div class="table-th">Инвентарный номер</div>
+                <div class="table-th">Категория</div>
+                <div class="table-th">Статус</div>
+                <div class="table-th">Комментарий</div>
+                <div class="table-th">Арендатор</div>
+                <div class="table-th">
+                  <button class="btn btn-outline-success" (click)="openModalAdd()">Добавить</button>
+                </div>
+              </div>
+            </div>
+            <div class="table-tbody">
+              <div class="table-tr" *ngFor="let equipment of equipmentsList; let i = index">
+                <div class="table-th">{{ i + 1 }}</div>
+                <div class="table-td">{{equipment.name}}</div>
+                <div class="table-td">{{equipment.inventory}}</div>
+                <div class="table-td">{{equipment.category}}</div>
+                <div class="table-td">{{equipment.status}}</div>
+                <div class="table-td">{{equipment.comment}}</div>
+                <div class="table-td">
+                  <div class="tooltip-block" *ngIf="equipment.status === 'Сдан'">
+                      Подробнее
+                    <span class="tooltip-text">
+                      {{'ФИО: ' + equipment.renterFio}} <br>
+                      {{'Телефон: ' + equipment.renterPhone}} <br>
+                      {{'Дата взятия в аренду: ' + equipment.renterDate}}
+                    </span>
+                  </div>
+                </div>
+                <div class="table-td">
+                  <button class="btn btn-outline-danger btn-delete" (click)="deleteEquipment(equipment)">Удалить</button>
+                  <button class="btn btn-outline-primary" (click)="openModalEdit(equipment)">Изменить</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Добавить оборудование</h5>
+      </div>
+      <div class="modal-body">
+        <app-pop-up-add></app-pop-up-add>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Закрыть</button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!--<div class="container-fluid body">-->
-<!--  <div class="col-md-10 mt-2 table">-->
-<!--&lt;!&ndash;    <h5 class="text-danger">Список оборудования:</h5>&ndash;&gt;-->
-<!--    <div class="card p-3 shadow">-->
-<!--      <div class="card-body">-->
-<!--        <table class="table table-hover">-->
-<!--          <thead>-->
-<!--          <tr>-->
-<!--            <th scope="col">Название</th>-->
-<!--            <th scope="col">Инвентарный номер</th>-->
-<!--            <th scope="col">Арендатор</th>-->
-<!--            <th scope="col"></th>-->
-<!--            <th scope="col"><button class="btn btn-outline-success" (click)="openDialog()">Добавить</button></th>-->
-<!--          </tr>-->
-<!--          </thead>-->
-<!--          <tbody>-->
-<!--          <tr *ngFor="let equipment of equipmentsList">-->
-<!--            <td >{{equipment.name}}</td>-->
-<!--            <td>{{equipment.inv_number}}</td>-->
-<!--            <td>-->
-<!--              <button class="btn btn-outline-danger" (click)="deleteEquipment(equipment)">Удалить</button>-->
-<!--            </td>-->
-<!--          </tr>-->
-<!--          </tbody>-->
-<!--        </table>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-
-<table class="table table-hover">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Название</th>
-    <th scope="col">Инвентарный номер</th>
-    <th scope="col">Категория</th>
-    <th scope="col"></th>
-    <th scope="col"><button class="btn btn-outline-success" (click)="openDialog()">Добавить</button></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let equipment of equipmentsList; let i = index">
-    <th scope="row">{{ i + 1 }}</th>
-    <td>{{equipment.name}}</td>
-    <td>{{equipment.inventory}}</td>
-    <td>{{equipment.category}}</td>
-    <td>
-      <button class="btn btn-outline-danger" (click)="deleteEquipment(equipment)">Удалить</button>
-      <button class="btn btn-outline-primary" (click)="openDialogEdit()">Редактировать</button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Изменить оборудование</h5>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()" novalidate>
+          <div>
+            <label for="name">Название</label>
+            <input type="text" class="form-control" id="name" formControlName="name" required>
+          </div>
+          <div>
+            <label for="inventory">Инвентарный номер</label>
+            <input type="text" class="form-control" id="inventory" formControlName="inventory" required>
+          </div>
+          <div>
+            <label for="category">Категория</label>
+            <select id="category" class="form-control" formControlName="category" required>
+              <option value="Экипровка">Экипровка</option>
+              <option value="Средство передвижения">Средство передвижения</option>
+              <option value="Бивачное снаряжение">Бивачное снаряжение</option>
+              <option value="Специальное снаряжение">Специальное снаряжение</option>
+              <option value="Прочее" selected="selected">Прочее</option>
+            </select>
+          </div>
+          <div>
+            <label for="status">Статус</label>
+            <select id="status" class="form-control" formControlName="status" required>
+              <option value="Сдан">Сдан</option>
+              <option value="На складе" selected="selected">На складе</option>
+            </select>
+          </div>
+          <div>
+            <label for="comment">Комментарий</label>
+            <input type="text" class="form-control" id="comment" formControlName="comment" required>
+          </div>
+          <div>
+            <label for="renterFio">ФИО</label>
+            <input type="text" class="form-control" id="renterFio" formControlName="renterFio" required>
+          </div>
+          <div>
+            <label for="renterPhone">Телефон</label>
+            <input type="text" class="form-control" id="renterPhone" formControlName="renterPhone" required>
+          </div>
+          <div>
+            <label for="renterDate">Дата взятия в аренду</label>
+            <input type="date" class="form-control" id="renterDate" formControlName="renterDate" required>
+          </div>
+          <div class="btn-row">
+            <button type="submit" class="btn btn-primary">Обновить</button>
+            <button type="reset" class="btn btn-danger">Сброс данных</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>

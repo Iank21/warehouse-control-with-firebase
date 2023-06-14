@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {EquipmentDto} from 'src/app/model/equipment';
+import { EquipmentDto } from 'src/app/model/equipment';
 import { AuthService } from 'src/app/shared/auth.service';
 import { DataService } from 'src/app/shared/data.service';
-import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
-import {PopUpAddComponent} from "../pop-up-add/pop-up-add.component";
-import {PopUpEditComponent} from "../pop-up-edit/pop-up-edit.component";
+import {FormBuilder, FormGroup} from "@angular/forms";
+
+declare const window: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -12,24 +12,85 @@ import {PopUpEditComponent} from "../pop-up-edit/pop-up-edit.component";
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  public editForm: FormGroup;
+  equipmentRef: any;
+
+  formModal: any;
 
   equipmentsList: EquipmentDto[] = [];
 
   constructor(
     private auth: AuthService,
     private data: DataService,
-    private dialog: MatDialog)
-  { }
+    public formBuilder: FormBuilder
+  ) {
+    this.editForm = this.formBuilder.group({
+      name: [''],
+      inventory: [''],
+      category: [''],
+      status: [''],
+      comment: [''],
+      renterFio: [''],
+      renterPhone: [''],
+      renterDate: ['']
+    })
+  }
 
   ngOnInit(): void {
-    this.getAllStudents();
+    this.getAllEquipments();
+  }
+
+  openModalAdd(){
+    this.formModal = new window.bootstrap.Modal(
+      document.getElementById("addModal")
+    );
+    this.formModal.show();
+  }
+
+  openModalEdit(equipment: EquipmentDto){
+    this.formModal = new window.bootstrap.Modal(
+      document.getElementById("editModal")
+    );
+    this.formModal.show();
+    this.getValueById(equipment);
+    this.idEdit(equipment);
+  }
+
+  getValueById(equipment: EquipmentDto) {
+    this.data.getEquipmentDoc(equipment).subscribe(res => {
+      this.equipmentRef = res;
+      this.editForm = this.formBuilder.group({
+        name:[this.equipmentRef.name],
+        inventory:[this.equipmentRef.inventory],
+        category:[this.equipmentRef.category],
+        status: [this.equipmentRef.status],
+        comment: [this.equipmentRef.comment],
+        renterFio: [this.equipmentRef.renterFio],
+        renterPhone: [this.equipmentRef.renterPhone],
+        renterDate: [this.equipmentRef.renterDate]
+      })
+    })
+  }
+
+  idEdit(equipment: EquipmentDto) {
+    // let id = '';
+    // return id = equipment.id;
+  }
+
+  onSubmit(){
+    // console.log(this.id);
+    // this.data.updateEquipment(this.editForm.value, this.id);
+  }
+
+  closeModal(){
+    this.formModal.hide();
   }
 
   logout() {
     this.auth.logout();
   }
 
-  getAllStudents() {
+  getAllEquipments() {
     this.data.getAllEquipments().subscribe(res => {
 
       this.equipmentsList = res.map((e: any) => {
@@ -39,47 +100,15 @@ export class DashboardComponent implements OnInit {
       })
 
     }, err => {
-      alert('Error while fetching data');
+      alert('Ошибка при получении данных');
     })
   }
 
-  //
-  // resetForm() {
-  //   this.id = '';
-  //   this.name = '';
-  //   this.inv_number = '';
-  // }
-  //
-  // updateEquipment() {
-  //
-  // }
-  //
-
   deleteEquipment(equipment: EquipmentDto) {
     if (window.confirm('Вы действительно хотите удалить '
-      + equipment.name + ' ' + equipment.inventory + ' ?')) {
+      + equipment.name + ' ' + equipment.inventory + '?')) {
       this.data.deleteEquipment(equipment);
     }
-  }
-
-  openDialog() {
-    const dialogRef = this.dialog.open(PopUpAddComponent, {
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      height: '100%',
-      width: '100%',
-      panelClass: 'full-screen-modal'
-    });
-  }
-
-  openDialogEdit() {
-    const dialogRef = this.dialog.open(PopUpEditComponent, {
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      height: '100%',
-      width: '100%',
-      panelClass: 'full-screen-modal'
-    });
   }
 
 }

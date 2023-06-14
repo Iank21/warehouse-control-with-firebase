@@ -1,7 +1,5 @@
-import {Component, Inject} from '@angular/core';
-import {EquipmentDto} from "../../model/equipment";
+import {Component} from '@angular/core';
 import {DataService} from "../../shared/data.service";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
@@ -14,21 +12,21 @@ export class PopUpAddComponent {
 
   constructor(
     private data: DataService,
-    private dialogRef: MatDialogRef<PopUpAddComponent>,
     public formBuilder: FormBuilder,
   ) {
     this.equipmentForm = this.formBuilder.group({
       name: [''],
       inventory: [''],
-      category: ['']
+      category: [''],
+      status: [''],
+      comment: [''],
+      renterFio: [''],
+      renterPhone: [''],
+      renterDate: ['']
     })
   }
 
   onSubmit(){
     this.data.addEquipment(this.equipmentForm.value);
-  }
-
-  onClose(): void {
-    this.dialogRef.close(true);
   }
 }

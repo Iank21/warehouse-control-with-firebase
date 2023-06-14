@@ -9,10 +9,6 @@ export class DataService {
 
   constructor(private afs : AngularFirestore) { }
 
-  getEquipmentDoc(id: any){
-    return this.afs.collection('/EquipmentDto').doc(id).valueChanges()
-  }
-
   addEquipment(equipment : EquipmentDto) {
     equipment.id = this.afs.createId();
     return this.afs.collection('/EquipmentDto').add(equipment);
@@ -26,18 +22,21 @@ export class DataService {
     this.afs.doc('/EquipmentDto/'+equipment.id).delete();
   }
 
-  // updateEquipment(equipment : EquipmentDto) {
-  //   this.deleteEquipment(equipment);
-  //   this.addEquipment(equipment);
-  // }
+  getEquipmentDoc(equipment : EquipmentDto) {
+    return this.afs.doc('/EquipmentDto/'+equipment.id).valueChanges();
+  }
 
-  updateEquipment(equipment : EquipmentDto, id: any) {
-    return this.afs.collection('/EquipmentDto').doc(id)
+  updateEquipment(equipment : EquipmentDto, id: string) {
+    return this.afs.doc('/EquipmentDto/' + id)
       .update({
         name: equipment.name,
         inventory: equipment.inventory,
-        category: equipment.category
+        category: equipment.category,
+        status: equipment.status,
+        comment: equipment.comment,
+        renterFio: equipment.renterFio,
+        renterPhone: equipment.renterPhone,
+        renterDate: equipment.renterDate
       })
   }
-
 }

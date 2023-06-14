@@ -3,26 +3,9 @@ export interface EquipmentDto {
   name: string,
   inventory: string,
   category: string,
-  //category: CategoryDto[],
-  // status: StatusDto[],
-  // renter: RenterDto[],
+  status: string,
+  comment: string,
+  renterFio: string,
+  renterPhone: string,
+  renterDate: Date
 }
-
-// export interface CategoryDto {
-//   outfit: string,
-//   transport: string,
-//   bivouac: string,
-//   special: string,
-//   other: string,
-// }
-//
-// export interface RenterDto {
-//   id: string,
-//   fio: string,
-//   phone: string,
-//   dateStart: Date,
-// }
-
-// export interface StatusDto {
-//
-// }

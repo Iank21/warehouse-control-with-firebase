@@ -18,8 +18,30 @@
     </select>
   </div>
   <div>
-    <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid">Обновить</button>
-    <br>
+    <label for="status">Статус</label>
+    <select id="status" class="form-control" formControlName="status" required>
+      <option value="Сдан">Сдан</option>
+      <option value="На складе" selected="selected">На складе</option>
+    </select>
+  </div>
+  <div>
+    <label for="comment">Комментарий</label>
+    <input type="text" class="form-control" id="comment" formControlName="comment" required>
+  </div>
+  <div>
+    <label for="renterFio">ФИО</label>
+    <input type="text" class="form-control" id="renterFio" formControlName="renterFio" required>
+  </div>
+  <div>
+    <label for="renterPhone">Телефон</label>
+    <input type="text" class="form-control" id="renterPhone" formControlName="renterPhone" required>
+  </div>
+  <div>
+    <label for="renterDate">Дата взятия в аренду</label>
+    <input type="date" class="form-control" id="renterDate" formControlName="renterDate" required>
+  </div>
+  <div class="btn-row">
+    <button type="submit" class="btn btn-primary">Обновить</button>
     <button type="reset" class="btn btn-danger">Сброс данных</button>
   </div>
 </form>

@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {DataService} from "../../shared/data.service";
-import {MatDialogRef} from "@angular/material/dialog";
-import {ActivatedRoute} from "@angular/router";
+import {EquipmentDto} from "../../model/equipment";
 
 @Component({
   selector: 'app-pop-up-edit',
@@ -15,37 +14,43 @@ export class PopUpEditComponent implements OnInit {
 
   constructor(
     private data: DataService,
-    private dialogRef: MatDialogRef<PopUpEditComponent>,
-    public formBuilder: FormBuilder,
-    public act: ActivatedRoute
+    public formBuilder: FormBuilder
   ) {
     this.editForm = this.formBuilder.group({
       name: [''],
       inventory: [''],
-      category: ['']
+      category: [''],
+      status: [''],
+      comment: [''],
+      renterFio: [''],
+      renterPhone: [''],
+      renterDate: ['']
     })
   }
 
   ngOnInit() {
-    const id = this.act.snapshot.paramMap.get('id');
+    // const id = this.act.snapshot.paramMap.get('id');
+    // console.log(id)
+    //this.getValueById(id);
+  }
 
-    this.data.getEquipmentDoc(id).subscribe(res => {
+  getValueById(equipment: EquipmentDto){
+    this.data.getEquipmentDoc(equipment).subscribe(res => {
       this.equipmentRef = res;
       this.editForm = this.formBuilder.group({
         name:[this.equipmentRef.name],
         inventory:[this.equipmentRef.inventory],
-        category:[this.equipmentRef.category]
+        category:[this.equipmentRef.category],
+        status: [this.equipmentRef.status],
+        comment: [this.equipmentRef.comment],
+        renterFio: [this.equipmentRef.renterFio],
+        renterPhone: [this.equipmentRef.renterPhone],
+        renterDate: [this.equipmentRef.renterDate]
       })
     })
   }
 
   onSubmit(){
-    const id = this.act.snapshot.paramMap.get('id');
-
-    this.data.updateEquipment(this.editForm.value, id);
-  }
-
-  onClose(): void {
-    this.dialogRef.close(true);
+    //this.data.updateEquipment(this.editForm.value);
   }
 }

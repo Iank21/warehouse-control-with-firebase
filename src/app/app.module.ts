@@ -11,9 +11,9 @@ import { RegisterComponent } from './component/register/register.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatDialogModule } from '@angular/material/dialog';
 import { PopUpAddComponent } from './component/pop-up-add/pop-up-add.component';
 import { PopUpEditComponent } from './component/pop-up-edit/pop-up-edit.component';
+import { NewTestComponent } from './component/new-test/new-test.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,8 @@ import { PopUpEditComponent } from './component/pop-up-edit/pop-up-edit.componen
     RegisterComponent,
     DashboardComponent,
     PopUpAddComponent,
-    PopUpEditComponent
+    PopUpEditComponent,
+    NewTestComponent
   ],
   imports: [
     BrowserModule,
@@ -30,8 +31,7 @@ import { PopUpEditComponent } from './component/pop-up-edit/pop-up-edit.componen
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
     BrowserAnimationsModule,
-    MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

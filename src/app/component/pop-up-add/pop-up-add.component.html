@@ -1,36 +1,3 @@
-<!--<div class="pop-up-add-comp">-->
-<!--  <mat-dialog-actions>-->
-<!--    <button mat-button mat-dialog-close>X</button>-->
-<!--  </mat-dialog-actions>-->
-<!--  <mat-dialog-content>-->
-<!--      <div class="card border-0 shadow p-3">-->
-<!--        <div class="form-floating mb-3 tetx-center">-->
-<!--          <h5 class="text-center text-warning">Добавление</h5>-->
-<!--        </div>-->
-<!--        <div class="form-floating mb-3">-->
-<!--          <input type="text" class="form-control" id="name" name="name" [(ngModel)]="name">-->
-<!--          <label for="name">Название</label>-->
-<!--        </div>-->
-<!--        <div class="form-floating mb-3">-->
-<!--          <input type="text" class="form-control" id="inventory" name="inventory" [(ngModel)]="inv_number">-->
-<!--          <label for="inventory">Инвентарный номер</label>-->
-<!--        </div>-->
-<!--        <div class="form-floating mb-3">-->
-<!--          <p for="category">Категория</p>-->
-<!--          <select id="category" name="category">-->
-<!--            <option value="outfit">Экипровка</option>-->
-<!--            <option value="transport">Средство передвижения</option>-->
-<!--            <option value="bivouac">Бивачное снаряжение</option>-->
-<!--            <option value="special">Бивачное снаряжение</option>-->
-<!--            <option value="other">Прочее</option>-->
-<!--          </select>-->
-<!--        </div>-->
-<!--        <button type="button" class="btn btn-outline-success" (click)="addEquipment()">Добавить</button>-->
-<!--      </div>-->
-<!--  </mat-dialog-content>-->
-<!--</div>-->
-
-
 <form [formGroup]="equipmentForm" (ngSubmit)="onSubmit()" novalidate>
   <div>
     <label for="name">Название</label>
@@ -51,8 +18,30 @@
     </select>
   </div>
   <div>
-    <button type="submit" class="btn btn-primary" [disabled]="!equipmentForm.valid">Добавить</button>
-    <br>
+    <label for="status">Статус</label>
+    <select id="status" class="form-control" formControlName="status" required>
+      <option value="Сдан">Сдан</option>
+      <option value="На складе" selected="selected">На складе</option>
+    </select>
+  </div>
+  <div>
+    <label for="comment">Комментарий</label>
+    <input type="text" class="form-control" id="comment" formControlName="comment" required>
+  </div>
+  <div>
+    <label for="renterFio">ФИО</label>
+    <input type="text" class="form-control" id="renterFio" formControlName="renterFio" required>
+  </div>
+  <div>
+    <label for="renterPhone">Телефон</label>
+    <input type="text" class="form-control" id="renterPhone" formControlName="renterPhone" required>
+  </div>
+  <div>
+    <label for="renterDate">Дата взятия в аренду</label>
+    <input type="date" class="form-control" id="renterDate" formControlName="renterDate" required>
+  </div>
+  <div class="btn-row">
+    <button type="submit" class="btn btn-primary">Добавить</button>
     <button type="reset" class="btn btn-danger">Сброс данных</button>
   </div>
 </form>
