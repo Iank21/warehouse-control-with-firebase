@@ -19,6 +19,8 @@ export class DashboardComponent implements OnInit {
 
   equipmentsList: EquipmentDto[] = [];
 
+  private id: string = '';
+
   constructor(
     private auth: AuthService,
     private data: DataService,
@@ -53,7 +55,8 @@ export class DashboardComponent implements OnInit {
     );
     this.formModal.show();
     this.getValueById(equipment);
-    this.idEdit(equipment);
+    this.id = equipment.id;
+    return this.id;
   }
 
   getValueById(equipment: EquipmentDto) {
@@ -72,14 +75,8 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  idEdit(equipment: EquipmentDto) {
-    // let id = '';
-    // return id = equipment.id;
-  }
-
   onSubmit(){
-    // console.log(this.id);
-    // this.data.updateEquipment(this.editForm.value, this.id);
+    this.data.updateEquipment(this.editForm.value, this.id);
   }
 
   closeModal(){
