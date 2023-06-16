@@ -13,8 +13,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { PopUpAddComponent } from './component/pop-up-add/pop-up-add.component';
 import { PopUpEditComponent } from './component/pop-up-edit/pop-up-edit.component';
-import { NewTestComponent } from './component/new-test/new-test.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,8 +20,7 @@ import { NewTestComponent } from './component/new-test/new-test.component';
     RegisterComponent,
     DashboardComponent,
     PopUpAddComponent,
-    PopUpEditComponent,
-    NewTestComponent
+    PopUpEditComponent
   ],
   imports: [
     BrowserModule,
